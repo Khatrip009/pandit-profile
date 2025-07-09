@@ -94,26 +94,27 @@
             background-color: var(--light-bg);
         }
         
-        .hero {
-  position: relative;
-  height: 100vh;
-  background: url('shreeja_plant.jpg') center/cover no-repeat;
-}
+       .hero {
+      position: relative;
+      height: 100vh;
+      background: url('shreeja_plant.jpg') center/cover no-repeat;
+    }
 
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(rgba(0, 100, 50, 0.6), rgba(0, 0, 0, 0.6));
-  /* Or use gradient for layered tone */
-  /* background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 100, 50, 0.5)); */
-  z-index: 1;
-}
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        rgba(0, 100, 50, 0.5),   /* 50% green tint */
+        rgba(0, 0, 0, 0.5)       /* 50% black fade */
+      );
+      z-index: 1;
+    }
 
-.hero > * {
-  position: relative;
-  z-index: 2;
-}
+    .hero > * {
+      position: relative;
+      z-index: 2;
+    }
         
         .name-animation {
             animation: fadeInDown 1.5s ease-out;
