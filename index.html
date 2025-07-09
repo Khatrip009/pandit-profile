@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pandit Pankaj Khatri | Shreeja Biotech</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS animations
+            AOS.init({
+                duration: 1000,
+                once: true
+            });
+
+            // Initialize GSAP animations
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Animate counters
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                gsap.to(counter, {
+                    innerText: parseInt(counter.getAttribute('data-target')),
+                    duration: 2,
+                    scrollTrigger: counter,
+                    snap: { innerText: 1 },
+                    modifiers: {
+                        innerText: (innerText) => {
+                            return Math.floor(innerText) + '+';
+                        }
+                    }
+                });
+            });
+
+            // Initialize team slider
+            const teamSlider = document.getElementById('team-slider');
+            const teamItems = document.querySelectorAll('.team-item');
+            const totalSlides = teamItems.length;
+            let currentSlide = 0;
+            
+            function showSlide(index) {
+                teamItems.forEach((item, i) => {
+                    item.classList.toggle('hidden', i !== index);
+                    item.classList.toggle('block', i === index);
+                });
+            }
+            
+            document.getElementById('prev-slide').addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                showSlide(currentSlide);
+            });
+            
+            document.getElementById('next-slide').addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+            });
+            
+            showSlide(currentSlide);
+            
+            // Floating doodles animation
+            const doodles = document.querySelectorAll('.doodle');
+            doodles.forEach(doodle => {
+                const duration = Math.random() * 6 + 4;
+                const delay = Math.random() * 2;
+                const y = Math.random() * 60 + 20;
+                
+                gsap.to(doodle, {
+                    y: `-=${y}px`,
+                    duration: duration,
+                    yoyo: true,
+                    repeat: -1,
+                    ease: "sine.inOut",
+                    delay: delay
+                });
+            });
+        });
+    </script>
+    <style>
+        :root {
+            --primary-green: #0d9488;
+            --secondary-green: #059669;
+            --accent-gold: #d4af37;
+            --light-bg: #f0fdf4;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background-color: var(--light-bg);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('shreeja_plant.jpg') center/cover;
+            height: 100vh;
+        }
+        
+        .name-animation {
+            animation: fadeInDown 1.5s ease-out;
+        }
+        
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .btn-gold {
+            background: linear-gradient(45deg, var(--accent-gold), #fde68a);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .doodle {
+            position: absolute;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .tech-card {
+            transition: all 0.4s ease;
+            background: white;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .tech-card:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-gold);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-item {
+            transition: all 0.4s ease;
+        }
+        
+        .contact-form input, .contact-form textarea {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .leaf-animation {
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .energy-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+        
+        .energy-wave svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 100px;
+        }
+        
+        .energy-wave .shape-fill {
+            fill: #059669;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating doodles -->
+    <div class="doodle" style="top: 15%; left: 5%;">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="1">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+        </svg>
+    </div>
+    <div class="doodle" style="top: 25%; right: 8%;">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="1">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4h-6"></path>
+        </svg>
+    </div>
+    <div class="doodle" style="top: 60%; left: 10%;">
+        <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+        </svg>
+    </div>
+    <div class="doodle" style="top: 75%; right: 15%;">
+        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="1">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4h-6"></path>
+        </svg>
+    </div>
+
+    <!-- Header Section -->
+    <header class="hero relative flex items-center justify-center">
+        <div class="absolute top-5 left-0 right-0 z-10">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center">
+                    <div class="text-white font-bold text-2xl">Shreeja Biotech</div>
+                    <nav class="hidden md:block">
+                        <ul class="flex space-x-8">
+                            <li><a href="#about" class="text-white hover:text-amber-200 transition">About</a></li>
+                            <li><a href="#company" class="text-white hover:text-amber-200 transition">Company</a></li>
+                            <li><a href="#technology" class="text-white hover:text-amber-200 transition">Technology</a></li>
+                            <li><a href="#team" class="text-white hover:text-amber-200 transition">Team</a></li>
+                            <li><a href="#contact" class="text-white hover:text-amber-200 transition">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center px-4 z-10">
+            <h1 class="name-animation text-4xl md:text-6xl font-bold text-white mb-4">Pandit Pankaj Khatri</h1>
+            <p class="text-xl md:text-2xl text-white mb-8">Visionary Leader | Bio-Energy Expert | Founder – Shreeja Biotech</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="Company_Profile.pdf" class="btn-gold text-gray-900 font-bold py-3 px-8 rounded-full text-lg inline-flex items-center justify-center">
+                    <i class="fas fa-download mr-2"></i> Download Profile PDF
+                </a>
+                <a href="https://www.shreejabiotech.shop" class="bg-transparent border-2 border-amber-200 text-white font-bold py-3 px-8 rounded-full text-lg inline-flex items-center justify-center hover:bg-amber-200 hover:text-gray-900 transition">
+                    <i class="fas fa-globe mr-2"></i> Visit Company Website
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 flex justify-center">
+            <a href="#about" class="animate-bounce text-white text-4xl">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </header>
+
+   <section id="about" class="py-20 bg-white relative overflow-hidden">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center">
+      
+      <!-- Left: Image + Counter -->
+      <div class="md:w-1/3 mb-10 md:mb-0 flex justify-center relative">
+        <img src="Pankaj_Khatri.jpg" alt="Pankaj Khatri Image" class="w-64 h-80 object-cover rounded-xl shadow-lg relative z-10">
+        <!-- Counter Badge -->
+        <div class="absolute bottom-0 right-6 bg-amber-200 rounded-full w-16 h-16 flex items-center justify-center z-20 shadow-md">
+          <span class="text-3xl font-bold counter text-gray-800" data-target="15">15</span>
+        </div>
+      </div>
+
+      <!-- Right: Text Content -->
+      <div class="md:w-2/3 md:pl-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6" data-aos="fade-right">About Pandit Pankaj Khatri</h2>
+        <p class="text-gray-600 mb-6 leading-relaxed" data-aos="fade-right" data-aos-delay="100">
+          Pandit Pankaj Khatri is the visionary founder and strategic force behind Shreeja Biotech, a leading renewable energy enterprise based in Surat, Gujarat. With over 15 years of progressive leadership experience in education, innovation & bio-energy technologies, he has positioned himself as a pioneer in India's bio-CNG movement.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <!-- Cards -->
+          <div class="flex items-start" data-aos="fade-up" data-aos-delay="200">
+            <div class="bg-green-100 p-3 rounded-full mr-4">
+              <i class="fas fa-lightbulb text-green-600 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg text-gray-800">Innovator</h3>
+              <p class="text-gray-600">Founder of India's first semi-cryogenic Bio-CNG upgradation system (patent pending)</p>
+            </div>
+          </div>
+          <div class="flex items-start" data-aos="fade-up" data-aos-delay="300">
+            <div class="bg-green-100 p-3 rounded-full mr-4">
+              <i class="fas fa-globe-asia text-green-600 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg text-gray-800">Global Consultant</h3>
+              <p class="text-gray-600">International Technical Consultant for Ajil Biofuel Sdn. Bhd. in Malaysia</p>
+            </div>
+          </div>
+          <div class="flex items-start" data-aos="fade-up" data-aos-delay="400">
+            <div class="bg-green-100 p-3 rounded-full mr-4">
+              <i class="fas fa-leaf text-green-600 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg text-gray-800">Sustainability Advocate</h3>
+              <p class="text-gray-600">Developed waste-to-wealth circular models for agricultural and industrial waste</p>
+            </div>
+          </div>
+          <div class="flex items-start" data-aos="fade-up" data-aos-delay="500">
+            <div class="bg-green-100 p-3 rounded-full mr-4">
+              <i class="fas fa-graduation-cap text-green-600 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg text-gray-800">Educator</h3>
+              <p class="text-gray-600">15+ years of teaching experience in renewable energy technologies</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-3">
+          <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full">Renewable Energy</span>
+          <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full">Bio-CNG Technology</span>
+          <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full">Waste-to-Energy</span>
+          <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full">Sustainability</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Company Overview Section -->
+    <section id="company" class="py-20 bg-green-50 relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="flex justify-center mb-8">
+                    <img src="Shreeja_LOGO.png" class="w-64 mx-auto"
+                    </div>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6" data-aos="fade-up">Company Overview</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="mb-12" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-xl font-bold text-green-700 mb-3">Mission</h3>
+                        <p class="text-gray-700 italic">"To develop, innovate, and implement world-class renewable energy solutions that transform organic waste into high-value, sustainable energy resources while promoting environmental responsibility."</p>
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-xl font-bold text-green-700 mb-3">Vision</h3>
+                        <p class="text-gray-700 italic">"To establish Shreeja Bio-Tech as a global leader in Waste-to-Energy and Bio-CNG production, delivering cost-effective, sustainable, and high-performance solutions that contribute to a cleaner, greener future."</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover" data-aos="flip-left">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-industry text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Bio-CNG Plant Design</h3>
+                    <p class="text-gray-600">Custom, scalable, and high-efficiency compressed bio-gas plants with turnkey solutions</p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover" data-aos="flip-left" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-flask text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Anaerobic Digestion R&D</h3>
+                    <p class="text-gray-600">Innovating new biomethanation technologies and anaerobic digestion advancements</p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover" data-aos="flip-left" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-filter text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Hybrid Gas Purification</h3>
+                    <p class="text-gray-600">Industry-leading Water Scrubbing & PSA hybrid systems for methane purification</p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover" data-aos="flip-left" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tools text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Turnkey Project Execution</h3>
+                    <p class="text-gray-600">Complete solutions from engineering to commissioning and post-implementation support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology & Innovations Section -->
+    <section id="technology" class="py-20 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-aos="fade-up">Technology & Innovations</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Pioneering sustainable energy solutions through cutting-edge technology and innovative approaches
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                <div class="tech-card p-8 rounded-2xl" data-aos="fade-right">
+                    <div class="flex items-start mb-5">
+                        <div class="bg-amber-100 p-4 rounded-lg mr-5">
+                            <i class="fas fa-snowflake text-amber-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Semi-Cryogenic Gas Separation</h3>
+                            <p class="text-gray-600">Proprietary technology using multi-stage compression and precision chilling (-20°C) achieving up to 98% methane purity in biogas purification.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tech-card p-8 rounded-2xl" data-aos="fade-left" data-aos-delay="100">
+                    <div class="flex items-start mb-5">
+                        <div class="bg-green-100 p-4 rounded-lg mr-5">
+                            <i class="fas fa-recycle text-green-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">CO₂ Recovery & Commercialization</h3>
+                            <p class="text-gray-600">Innovative extraction and commercialization of food-grade CO₂ for industrial and medical applications in the ₹45–₹55/kg price band.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tech-card p-8 rounded-2xl" data-aos="fade-right" data-aos-delay="200">
+                    <div class="flex items-start mb-5">
+                        <div class="bg-amber-100 p-4 rounded-lg mr-5">
+                            <i class="fas fa-seedling text-amber-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Fertilizer Slurry Optimization</h3>
+                            <p class="text-gray-600">Advanced R&D for Napier Grass slurry optimization creating valuable organic fertilizer from waste byproducts.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tech-card p-8 rounded-2xl" data-aos="fade-left" data-aos-delay="300">
+                    <div class="flex items-start mb-5">
+                        <div class="bg-green-100 p-4 rounded-lg mr-5">
+                            <i class="fas fa-robot text-green-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">AI-based Plant Monitoring</h3>
+                            <p class="text-gray-600">Integration of automation and AI-based monitoring systems for next-generation Waste-to-Energy solutions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white relative">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-aos="fade-up">Get In Touch</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                        Have questions about our renewable energy solutions? Reach out to us.
+                    </p>
+                </div>
+                
+                <div class="flex flex-col lg:flex-row gap-10">
+                    <div class="lg:w-1/3" data-aos="fade-right">
+                        <div class="bg-green-50 rounded-2xl p-8 h-full">
+                            <h3 class="text-xl font-bold text-gray-800 mb-6">Contact Information</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="flex">
+                                    <div class="bg-green-100 p-3 rounded-full mr-4">
+                                        <i class="fas fa-envelope text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-700">Email</h4>
+                                        <a href="mailto:pankaj_khatri@shreejabiotech.shop" class="text-green-600 hover:underline">pankaj_khatri@shreejabiotech.shop</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex">
+                                    <div class="bg-green-100 p-3 rounded-full mr-4">
+                                        <i class="fas fa-phone-alt text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-700">Phone</h4>
+                                        <p class="text-green-600">+91 70697 85900</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex">
+                                    <div class="bg-green-100 p-3 rounded-full mr-4">
+                                        <i class="fas fa-map-marker-alt text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-700">Location</h4>
+                                        <p class="text-gray-600">372, V Square, Palanpur jakatnaka, Surat - 395 005, Gujarat, India</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-10">
+                                <h4 class="font-semibold text-gray-700 mb-4">Follow Us</h4>
+                                <div class="flex space-x-4">
+                                    <a href="#" class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 hover:bg-green-600 hover:text-white transition">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 hover:bg-green-600 hover:text-white transition">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 hover:bg-green-600 hover:text-white transition">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 hover:bg-green-600 hover:text-white transition">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:w-2/3" data-aos="fade-left" data-aos-delay="100">
+                        <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-lg">
+                            <h3 class="text-xl font-bold text-gray-800 mb-6">Send a Message</h3>
+                            <form class="contact-form space-y-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Full Name</label>
+                                        <input type="text" class="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Email Address</label>
+                                        <input type="email" class="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Phone Number</label>
+                                        <input type="tel" class="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Subject</label>
+                                        <input type="text" class="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 mb-2">Message</label>
+                                    <textarea rows="5" class="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn-gold text-gray-900 font-bold py-3 px-8 rounded-lg text-lg inline-flex items-center justify-center w-full">
+                                    <i class="fas fa-paper-plane mr-2"></i> Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-green-800 text-white pt-16 pb-10 relative">
+        <div class="energy-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0">
+                    <h2 class="text-2xl font-bold">Shreeja Bio-Tech</h2>
+                    <p class="mt-2 text-green-200">Innovating Energy, Advancing Solutions</p>
+                </div>
+                
+                <div class="text-center mb-8 md:mb-0">
+                    <p>pankaj_khatri@shreejabiotech.shop</p>
+                    <p class="mt-2">+91 70697 85900</p>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-green-700 flex items-center justify-center text-white hover:bg-green-600 transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-green-700 flex items-center justify-center text-white hover:bg-green-600 transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-green-700 flex items-center justify-center text-white hover:bg-green-600 transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-green-700 flex items-center justify-center text-white hover:bg-green-600 transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-green-700 mt-10 pt-6 text-center text-green-300">
+                <p>&copy; 2024 Shreeja Biotech. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
