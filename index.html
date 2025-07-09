@@ -94,7 +94,7 @@
             background-color: var(--light-bg);
         }
         
-     .hero {
+        .hero {
   position: relative;
   height: 100vh;
   background: url('shreeja_plant.jpg') center/cover no-repeat;
@@ -104,10 +104,9 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    rgba(0, 100, 50, 0.5),   /* 50% green tint */
-    rgba(0, 0, 0, 0.5)       /* 50% black fade */
-  );
+  background: linear-gradient(rgba(0, 100, 50, 0.6), rgba(0, 0, 0, 0.6));
+  /* Or use gradient for layered tone */
+  /* background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 100, 50, 0.5)); */
   z-index: 1;
 }
 
@@ -115,7 +114,6 @@
   position: relative;
   z-index: 2;
 }
-
         
         .name-animation {
             animation: fadeInDown 1.5s ease-out;
@@ -243,43 +241,37 @@
     </div>
 
     <!-- Header Section -->
-    <header class="hero relative flex items-center justify-center">
-        <div class="absolute top-5 left-0 right-0 z-10">
-            <div class="container mx-auto px-4">
-                <div class="flex justify-between items-center">
-                    <div class="text-white font-bold text-2xl">Shreeja Biotech</div>
-                    <nav class="hidden md:block">
-                        <ul class="flex space-x-8">
-                            <li><a href="#about" class="text-white hover:text-amber-200 transition">About</a></li>
-                            <li><a href="#company" class="text-white hover:text-amber-200 transition">Company</a></li>
-                            <li><a href="#technology" class="text-white hover:text-amber-200 transition">Technology</a></li>
-                            <li><a href="#team" class="text-white hover:text-amber-200 transition">Team</a></li>
-                            <li><a href="#contact" class="text-white hover:text-amber-200 transition">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center px-4 z-10">
-            <h1 class="name-animation text-4xl md:text-6xl font-bold text-white mb-4">Pandit Pankaj Khatri</h1>
-            <p class="text-xl md:text-2xl text-white mb-8">Visionary Leader | Bio-Energy Expert | Founder – Shreeja Biotech</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="Company_Profile.pdf" class="btn-gold text-gray-900 font-bold py-3 px-8 rounded-full text-lg inline-flex items-center justify-center">
-                    <i class="fas fa-download mr-2"></i> Download Profile PDF
-                </a>
-                <a href="https://www.shreejabiotech.shop" class="bg-transparent border-2 border-amber-200 text-white font-bold py-3 px-8 rounded-full text-lg inline-flex items-center justify-center hover:bg-amber-200 hover:text-gray-900 transition">
-                    <i class="fas fa-globe mr-2"></i> Visit Company Website
-                </a>
-            </div>
-        </div>
-        
-        <div class="absolute bottom-10 left-0 right-0 flex justify-center">
-            <a href="#about" class="animate-bounce text-white text-4xl">
-                <i class="fas fa-chevron-down"></i>
-            </a>
-        </div>
-    </header>
+    <!-- Header (Fixed and separated) -->
+<header class="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-md shadow-md">
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex justify-between items-center">
+      <div class="text-green-700 font-bold text-2xl">Shreeja Biotech</div>
+      <nav class="hidden md:block">
+        <ul class="flex space-x-8">
+          <li><a href="#about" class="text-gray-800 hover:text-white transition">About</a></li>
+          <li><a href="#company" class="text-gray-800 hover:text-white transition">Company</a></li>
+          <li><a href="#technology" class="text-gray-800 hover:text-white transition">Technology</a></li>
+          <li><a href="#contact" class="text-gray-800 hover:text-white transition">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+<!-- Hero Section -->
+<section class="hero relative flex items-center justify-center text-center px-4 pt-40">
+  <div class="z-10">
+    <h1 class="name-animation text-4xl md:text-6xl font-bold text-white mb-4">Pandit Pankaj Khatri</h1>
+    <p class="text-xl md:text-2xl text-white mb-8">Visionary Leader | Bio-Energy Expert | Founder – Shreeja Biotech</p>
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <a href="Company_Profile.pdf" class="btn-gold text-gray-900 font-bold py-3 px-8 rounded-full text-lg inline-flex items-center justify-center">
+        <i class="fas fa-download mr-2"></i> Download Profile PDF
+      </a>
+      <a href="https://www.shreejabiotech.shop" class="bg-transparent border-2 border-amber-200 text-white font-bold py-3 px-8 rounded-full text-lg inline-flex items-center justify-center hover:bg-amber-200 hover:text-gray-900 transition">
+        <i class="fas fa-globe mr-2"></i> Visit Company Website
+      </a>
+    </div>
+  </div>
+</section>
 
    <section id="about" class="py-20 bg-white relative overflow-hidden">
   <div class="container mx-auto px-4">
